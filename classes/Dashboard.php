@@ -186,6 +186,27 @@ class Dashboard
         }
 
     }
+    // Total Due
+// Total Due
+public function totalDue()
+{
+    $query = "SELECT SUM(due) as total_due FROM tbl_sell";
+    $st = $this->dbObj->select($query);  // use select() method from your Database class
+
+    if ($st) {
+        $row = $st->fetch_assoc();
+        $total_due = $row['total_due'];
+        if ($total_due !== null) {
+            return number_format((float)$total_due, 2, '.', '');
+        } else {
+            return '0.00';
+        }
+    } else {
+        return '0.00';
+    }
+}
+
+
 
 
 }
