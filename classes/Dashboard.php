@@ -14,6 +14,7 @@ class Dashboard
 
     }
 
+
     /*
     !--------------------------------------
     !               Today's Sale
@@ -129,6 +130,7 @@ class Dashboard
 
     }
 
+
     // Total Products
     public function totalProducts()
     {
@@ -184,20 +186,6 @@ class Dashboard
         }
 
     }
-    public function totalDue()
-{
-    $query = "
-        SELECT SUM(total_due - total_paid) AS total_due
-        FROM tbl_sell
-    ";
-
-    $st = $this->dbObj->select($query);
-    if ($st) {
-        $row = $st->fetch_assoc();
-        return number_format((float)($row['total_due'] ?? 0), 2, '.', '');
-    }
-    return '0.00';
-}
 
 
 }
