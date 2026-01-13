@@ -14,7 +14,6 @@ class Dashboard
 
     }
 
-
     /*
     !--------------------------------------
     !               Today's Sale
@@ -130,7 +129,6 @@ class Dashboard
 
     }
 
-
     // Total Products
     public function totalProducts()
     {
@@ -186,27 +184,20 @@ class Dashboard
         }
 
     }
-    // Total Due
-// Total Due
-public function totalDue()
+    public function totalDue()
 {
-    $query = "SELECT SUM(due) as total_due FROM tbl_sell";
-    $st = $this->dbObj->select($query);  // use select() method from your Database class
+    $query = "
+        SELECT SUM(total_due - total_paid) AS total_due
+        FROM tbl_sell
+    ";
 
+    $st = $this->dbObj->select($query);
     if ($st) {
         $row = $st->fetch_assoc();
-        $total_due = $row['total_due'];
-        if ($total_due !== null) {
-            return number_format((float)$total_due, 2, '.', '');
-        } else {
-            return '0.00';
-        }
-    } else {
-        return '0.00';
+        return number_format((float)($row['total_due'] ?? 0), 2, '.', '');
     }
+    return '0.00';
 }
-
-
 
 
 }
